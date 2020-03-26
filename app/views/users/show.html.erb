@@ -1,0 +1,18 @@
+<h3>Username : <%= @user.username %></h3>
+      <h4>Points : <%= @user.points %></h4>
+      <h5>Number of games played : <%= @user.games.length %></h5>
+      <br><br><br>
+
+<h4>Games played :</h4> 
+
+<ul>
+<% @games.each do |g| %>
+<li>
+<h5>author : <%= g.users.find(1).username %></h5>
+	<% if g.users.length == 2 %>
+	<h6>other player : <%= g.users.find(2).username %></h6>
+	<% end %>
+	<h7>bet : <%= g.bet %></h7>
+</li>	
+<% end %>
+</ul>

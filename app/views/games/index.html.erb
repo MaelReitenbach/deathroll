@@ -6,7 +6,7 @@
 <% Game.all.each do |game| %>
 <% if game.finished == false %>
     <li id="<%= game.id %>">
-      <h3>Author : <%= game.users.find(1).username %></h3>
+      <h3><a href="/users/<%= game.users.find(1).id %>">Author : <%= game.users.find(1).username %></a></h3>
       <h4>Points bet by each players : <%= game.bet%></h4>
       <h5>Start of the roll: <%= game.dice_nb %></h5>
       <h6>Number of players to be involved : <%= game.player_nb %></h6>

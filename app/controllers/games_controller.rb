@@ -1,6 +1,11 @@
 class GamesController < ApplicationController
 	
 	def index
+		if user_signed_in?
+		if current_user.games.length == 0
+			current_user.points = 100
+		end
+		end	
 		@prems = []
 		@tri = []
 		User.all.to_a.each do |u|

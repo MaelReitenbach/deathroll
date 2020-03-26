@@ -1,0 +1,87 @@
+
+<%= flash[:success] %>
+<%= flash[:error] %>
+<br>  <br>
+<ul>
+<% Game.all.each do |game| %>
+<% if game.finished == false %>
+    <li id="<%= game.id %>">
+      <h3>Author : <%= game.users.find(1).username %></h3>
+      <h4>Points bet by each players : <%= game.bet%></h4>
+      <h5>Start of the roll: <%= game.dice_nb %></h5>
+      <h6>Number of players to be involved : <%= game.player_nb %></h6>
+      
+      <form action= <%= jointables_path %> method="POST">
+      <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+      <input type="hidden" name="partid" value="<%= game.id %>">
+      <input type="submit" value="Join">
+      </form>
+      <% if game.users.index(current_user) != nil && game.users.length >= game.player_nb %>
+      <a href="/games/<%= game.id %>"><button type="button">Play</button> </a>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>
+</ul>
+<br><br><br>
+
+<table>
+  <tr>
+    <th><strong>Username</strong></th>
+    <th><strong>Points</strong></th>
+  </tr>
+
+  <% if @prems[0] != nil %>
+  <tr>
+    <td><strong>#1</strong> <%= @prems[0].username %></td>
+    <td><%= @prems[0].points %></td>
+  </tr>
+  <% elsif @prems[1] != nil %>
+  <tr>
+    <td><strong>#2</strong> <%= @prems[1].username %></td>
+    <td><%= @prems[1].points %></td>
+  </tr>
+  <% elsif @prems[2] != nil %>
+  <tr>
+    <td><strong>#3</strong> <%= @prems[2].username %></td>
+    <td><%= @prems[2].points %></td>
+  </tr>
+  <% elsif @prems[3] != nil %>
+  <tr>
+    <td><strong>#4</strong> <%= @prems[3].username %></td>
+    <td><%= @prems[3].points %></td>
+  </tr>
+  <% elsif @prems[4] != nil %>
+  <tr>
+    <td><strong>#4</strong> <%= @prems[4].username %></td>
+    <td><%= @prems[4].points %></td>
+  </tr>
+  <% end %>
+</table>
+
+<br><br><br>
+<ul>
+  <% if user_signed_in? %>
+    <li>
+      <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+    </li>
+
+    <li>
+      Voici ton email : <%= current_user.email %>
+    </li>
+
+    <li>
+      <%= link_to "Edit email / password", edit_user_registration_path %>
+    </li>
+
+  <% else %>
+    <li>    
+      <%= link_to "Sign in", new_user_session_path %>
+    </li>
+
+    <li>
+      <%= link_to "Sign up", new_user_registration_path %>
+    </li>
+
+  <% end %>
+</ul>

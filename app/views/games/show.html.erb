@@ -1,0 +1,27 @@
+ 	<%= flash[:lost] %>
+ 	<%= flash[:roll] %>
+ 	<br><br>
+
+ 	<h3>Author : <%= @game.users.find(1).username %></h3>
+      <h4>Points bet by each players : <%= @game.bet%></h4>
+      <h5>The roll: <%= @game.dice_nb %></h5>
+      <h6>Number of players to be involved : <%= @game.player_nb %></h6>
+
+     <br><br><br>
+
+    <% if current_user == @game.users.find(@game.tour) && @game.finished == false %>
+    <form action= "/games/<%= @game.id %>/edit" method="GET">
+      <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+      <input type="hidden" name="roll" value="<%= @game.dice_nb %>">
+      <input type="hidden" name="partid" value="<%= @game.id %>">
+      <input type="submit" value="Roll !">
+      </form>
+    <% elsif current_user != @game.users.find(@game.tour) && @game.finished == false  %>
+      <p>Ce n'est pas encore votre tour. C'est actuellement le tour de <%= @game.users.find(@game.tour).username %> </p>
+    <% elsif current_user == @game.users.find(@game.tour) && @game.finished == true %>
+    	
+    <% else %>
+    <p> You won ! <%= @game.bet %> points have been added to your account ! </p>	
+
+    <% end %>
+

@@ -1,0 +1,8 @@
+<%= flash[:error] %>
+
+<%= form_with url: games_path do |form| %>
+	First roll : <%= number_field_tag 'roll', nil, in: 1...10000 %> <br><br>
+	Bet : <%= number_field_tag 'bet', nil, in: 1...10000 %> <br><br>
+
+	<%= submit_tag("Create") %>
+<% end %>

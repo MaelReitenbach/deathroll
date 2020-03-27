@@ -22,6 +22,19 @@
     	
     <% else %>
     <p> You won ! <%= @game.bet %> points have been added to your account ! </p>	
+   <% end %>
+<br><br><br>
+   <h5>Chat :</h5>
+   <ul>
+    <% @posts.each do |post| %>
+    <li><strong><%= post.user.username %> :</strong><br> 
+      <%= post.content %></li>
+      <% end %>
+   </ul>
 
-    <% end %>
-
+<form action= <%= posts_path %> method="POST">
+      <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+      <input type="hidden" name="game_id" value=<%= @game.id %> >
+      <input type="text" name="chat_text">
+      <input type="submit" value="Send">
+</form>

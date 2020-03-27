@@ -78,6 +78,7 @@ class GamesController < ApplicationController
 
 		if current_user.games.length == 0
 			current_user.points = 100
+			current_user.save
 		end
 
 		if des < 1
@@ -111,6 +112,7 @@ class GamesController < ApplicationController
 	end	
 
 	def show
-		@game = Game.find(params[:id])	
+		@game = Game.find(params[:id])
+		@posts = @game.posts
 	end	
 end

@@ -13,7 +13,7 @@ class GamesController < ApplicationController
 				@tri << u
 			end
 		end
-		@prems = @tri.sort_by(&:points)	
+		@prems = @tri.sort_by(&:points).reverse
 	end	
 
 	def edit
@@ -30,6 +30,7 @@ class GamesController < ApplicationController
 		
 		if roll <= 1
 			current_user.points = current_user.points - @g.bet
+			current_user.save
 			if @g.tour == 1
 				@other_player = @g.users.find(2)
 				@other_player.points = @other_player.points + @g.bet

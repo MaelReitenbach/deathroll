@@ -10,12 +10,14 @@
       <h4>Points bet by each players : <%= game.bet%></h4>
       <h5>Start of the roll: <%= game.dice_nb %></h5>
       <h6>Number of players to be involved : <%= game.player_nb %></h6>
-      
+      <% if game.users.index(current_user) != nil || game.users.length >= game.player_nb %>
+      <% else %>
       <form action= <%= jointables_path %> method="POST">
       <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
       <input type="hidden" name="partid" value="<%= game.id %>">
       <input type="submit" value="Join">
       </form>
+      <% end %>
       <% if game.users.index(current_user) != nil && game.users.length >= game.player_nb %>
       <a href="/games/<%= game.id %>"><button type="button">Play</button> </a>
       <% end %>
@@ -36,22 +38,26 @@
     <td><strong>#1</strong> <%= @prems[0].username %></td>
     <td><%= @prems[0].points %></td>
   </tr>
-  <% elsif @prems[1] != nil %>
+  <% end %>
+  <% if @prems[1] != nil %>
   <tr>
     <td><strong>#2</strong> <%= @prems[1].username %></td>
     <td><%= @prems[1].points %></td>
   </tr>
-  <% elsif @prems[2] != nil %>
+  <% end %>
+  <% if @prems[2] != nil %>
   <tr>
     <td><strong>#3</strong> <%= @prems[2].username %></td>
     <td><%= @prems[2].points %></td>
   </tr>
-  <% elsif @prems[3] != nil %>
+  <% end %>
+  <% if @prems[3] != nil %>
   <tr>
     <td><strong>#4</strong> <%= @prems[3].username %></td>
     <td><%= @prems[3].points %></td>
   </tr>
-  <% elsif @prems[4] != nil %>
+  <% end %>
+  <% if @prems[4] != nil %>
   <tr>
     <td><strong>#4</strong> <%= @prems[4].username %></td>
     <td><%= @prems[4].points %></td>

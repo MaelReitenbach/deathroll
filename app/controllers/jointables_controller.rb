@@ -1,6 +1,6 @@
 class JointablesController < ApplicationController
 	def create
-
+ 
 		g = Game.find(params[:partid])
 
 		if user_signed_in?

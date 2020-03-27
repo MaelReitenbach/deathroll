@@ -17,7 +17,7 @@
       <input type="submit" value="Roll !">
       </form>
     <% elsif current_user != @game.users.find(@game.tour) && @game.finished == false  %>
-      <p>Ce n'est pas encore votre tour. C'est actuellement le tour de <%= @game.users.find(@game.tour).username %> </p>
+      <p>It's not your turn yet ! It's <%= @game.users.find(@game.tour).username %>'s turn. Don't hesitate to refresh the page to check.</p>
     <% elsif current_user == @game.users.find(@game.tour) && @game.finished == true %>
     	
     <% else %>

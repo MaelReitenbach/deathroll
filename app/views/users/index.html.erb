@@ -1,0 +1,11 @@
+<br><br><br>
+<ul>
+<% User.all.each do |user| %>
+<li>
+<h3><a href="/users/<%= user.id %>"><%= user.username %></a></h3>
+<h4>Points : <%= user.points %></h4>
+<h4>Games played : <%= user.games.length %></h4>
+</li>
+<br>
+<% end %>
+</ul>
